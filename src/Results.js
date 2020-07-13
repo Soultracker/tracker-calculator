@@ -6,10 +6,10 @@ function NumberList(props) {
     <td key={number.toString()}>{number}</td>
   );
   return (
-    <table class="table">
+    <table className="table">
       <tbody>
         <tr>
-        {listItems}
+          {listItems}
         </tr>
       </tbody>
     </table>
@@ -29,16 +29,14 @@ class Results extends Component {
 
   render() {
     return (
-      <div className="content">
-        <h2>Results:</h2>
+      <div className="box content">
         <p>BPM: {this.props.bpm}</p>
-        <p>note duration: {this.props.noteDuration} msec.</p>
-        <h3>Positions in percentage:</h3>
+        <p>Note duration / Window length: {this.props.noteDuration} msec.</p>
+        <p>Middle position in percentage:</p>
         <NumberList numbers={this.props.startPosition} />
-        <h3>Positions with Granular window offset:</h3>
+        <p>Start position with Granular window offset:</p>
         <NumberList numbers={this.props.windowStartPosition} />
       </div>
-
     );
   }
 

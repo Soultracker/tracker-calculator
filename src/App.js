@@ -1,50 +1,55 @@
 import React, { Component } from 'react';
 import Form from './Form';
+import GrainList from './GrainList';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import 'react-bulma-components/dist/react-bulma-components.min.css';
+import { Navbar } from 'react-bulma-components';
+
 //import './App.css';
 
 class App extends Component {
+
+  state = { active : false }
+
+  handleClick = () => {
+    const { active } = this.state;
+    this.setState({ active: !active });
+  }
+
   render() {
     return (
-      <section class="section">
-        <div class="container is-fluid">
-          <h1 class="title">
+      <section className="section">
+        <div className="container is-fluid">
+          <h1 className="title">
             Tracker Calculator
           </h1>
         </div>
         <Router>
           <div className="container">
-            <nav className="navbar" role="navigation" aria-label="main navigation">
-              <div className="navbar-menu">
-                <div className="navbar-start">
-                  <div className="navbar-item">
-                  <Link to="/granular" className="navbar-item">Granular utilities</Link>
-                  </div>
-                  <div className="navbar-item">
-                  <Link to="/" className="navbar-item">Home</Link>
-                  </div>
-                  <div className="navbar-item">
-                  <Link to="/about" className="navbar-item">About</Link>
-                  </div>
-                </div>
-              </div>
-            </nav>
+            <Navbar active={this.state.active}>
+              <Navbar.Burger onClick={this.handleClick} />
+              <Navbar.Menu >
+                <Navbar.Item to="/regular-grain-position" renderAs={Link}>
+                  Regular Grain Position
+                </Navbar.Item>
+                <Navbar.Item to="/grain-list-composer" renderAs={Link}>
+                  Grain list Composer
+                </Navbar.Item>
+              </Navbar.Menu>
+            </Navbar>
             {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
             <Switch>
-              <Route path="/about">
-                <About/>
-              </Route>
-              <Route path="/granular">
+              <Route path="/regular-grain-position">
                 <Form />
               </Route>
-              <Route path="/">
-                <Home />
+              <Route path="/grain-list-composer">
+                <GrainList />
               </Route>
             </Switch>
           </div>
@@ -54,13 +59,8 @@ class App extends Component {
   }
 }
 
-function Home() {
-  return <h2>Home</h2>;
-}
 
-function About() {
-  return <h2>About</h2>;
-}
+
 
 
 export default App;
